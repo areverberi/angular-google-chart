@@ -14,8 +14,12 @@
     registerResizeEvent.$inject = ['$rootScope', '$window'];
     
     function registerResizeEvent($rootScope, $window){
+        $window.actualSize = $window.width();
         angular.element($window).on('resize', function () {
-                $rootScope.$emit('resizeMsg');
+                if($window.actualSize != $window.width()) {
+                    $rootScope.$emit('resizeMsg');
+                    $window.actualSize = $window.width();
+                }
             });
     }
 })();
