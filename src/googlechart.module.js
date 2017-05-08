@@ -1,13 +1,12 @@
 /* global angular */
 (function(){
     angular.module('googlechart', [])
-        .value('handleResize', true)
         .run(registerResizeEvent);
         
-    registerResizeEvent.$inject = ['$rootScope', '$window', 'handleResize'];
+    registerResizeEvent.$inject = ['$rootScope', '$window'];
     
-    function registerResizeEvent($rootScope, $window, handleResize){
-        if(handleResize){
+    function registerResizeEvent($rootScope, $window){
+        if($window.handleGchartResize){
             $window.actualSize = $window.innerWidth;
             angular.element($window).on('resize', function () {
                 if($window.actualSize != $window.innerWidth) {
